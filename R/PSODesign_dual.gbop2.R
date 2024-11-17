@@ -15,9 +15,9 @@
 #' @param nSwarm nSwarm for pso
 #' @param maxIter maxIter for pso
 #'
-#' @return
+#' @return A list on design parameters and operating characteristics
 #' @export
-#'
+#' @import globpso R6 Rcpp RcppArmadillo dplyr
 #' @examples
 #' PSODesign_dual(
 #' design = "optimal", #"minimax"
@@ -51,14 +51,14 @@ PSODesign_dual <- function(
     nSwarm = 64,
     maxIter = 200){
 
-  library(globpso)
-  library(R6)
-  library(Rcpp)
-  library(RcppArmadillo)
+  # library(globpso)
+  # library(R6)
+  # library(Rcpp)
+  # library(RcppArmadillo)
   # source("BOP2_functions_twoboundaries_v2.R")
-  source("boundcode_equalrand_jsm.R")
-  Rcpp::sourceCpp(file="Calculation_twoboundaries_jsm.cpp",cacheDir="cache")
-  numOfSimForTiralSetting = 10000   # Number of simulations
+  # source("boundcode_equalrand_jsm.R")
+  # Rcpp::sourceCpp(file="Calculation_twoboundaries_jsm.cpp",cacheDir="cache")
+   numOfSimForTiralSetting = 10000   # Number of simulations
 
 
 

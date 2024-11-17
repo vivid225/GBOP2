@@ -25,9 +25,9 @@
 #' @param nParallel number of PSO ensemble
 #' @param nCore number of core
 #'
-#' @return
+#' @return A list on design parameters and operating characteristics
 #' @export
-#'
+#' @import foreach doParallel globpso R6 Rcpp RcppArmadillo dplyr
 #' @examples
 #' PSOGO_power_TE(design = "optimal",
 #' pso_method = "all",
@@ -84,13 +84,13 @@ PSOGO_power_TE <- function(design = "optimal",
 
 
 
-  library(foreach)
-  library(doParallel)
-  library(globpso)
-  library(R6)
-  library(Rcpp)
-  library(RcppArmadillo)
-  library(dplyr)
+  # library(foreach)
+  # library(doParallel)
+  # library(globpso)
+  # library(R6)
+  # library(Rcpp)
+  # library(RcppArmadillo)
+  # library(dplyr)
 
   # Set up parallel computing
   cl <- makePSOCKcluster(nCore)
@@ -104,11 +104,11 @@ PSOGO_power_TE <- function(design = "optimal",
   res <- foreach(i = 1:nParallel, .packages = c("dplyr", "globpso", "R6", "Rcpp", "RcppArmadillo"),
                  .combine = rbind) %dopar% {
 
-                   source("BOP2_functions_EffTox.R")
-                   source("BOP2_TE_function.R")
-                   source("boundcode.R")
-                   Rcpp::sourceCpp(file = "Calculation2_original.cpp")
-                   source('PSO_power_TE.gbop2.R')
+                   # source("BOP2_functions_EffTox.R")
+                   # source("BOP2_TE_function.R")
+                   # source("boundcode.R")
+                   # Rcpp::sourceCpp(file = "Calculation2_original.cpp")
+                   # source('PSO_power_TE.gbop2.R')
                    current_seed <- seeds_list[i]
 
                    if (pso_method == "all") {

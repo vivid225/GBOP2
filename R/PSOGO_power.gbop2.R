@@ -17,7 +17,7 @@
 #'
 #' @return a list
 #' @export
-#'
+#' @import foreach doParallel globpso R6 Rcpp RcppArmadillo dplyr
 #' @examples
 #'PSOGO_power(
 #'  nlooks = 1,
@@ -54,14 +54,14 @@ PSOGO_power <- function(
   ## option for which pso to use
 
 
-  # Load necessary libraries
-  library(foreach)
-  library(doParallel)
-  library(globpso)
-  library(R6)
-  library(Rcpp)
-  library(RcppArmadillo)
-  library(dplyr)
+
+# library(foreach)
+# library(doParallel)
+# library(globpso)
+# library(R6)
+# library(Rcpp)
+# library(RcppArmadillo)
+# library(dplyr)
 
   # Set up parallel computing
   cl <- makePSOCKcluster(nCore)  # Define cluster with 4 cores
@@ -77,14 +77,14 @@ PSOGO_power <- function(
                  .combine = rbind) %dopar%  {
 
                    # Load necessary libraries for each worker
-                   library(globpso)
-                   library(R6)
-                   library(Rcpp)
-                   library(RcppArmadillo)
-                   library(dplyr)
+                   # library(globpso)
+                   # library(R6)
+                   # library(Rcpp)
+                   # library(RcppArmadillo)
+                   # library(dplyr)
 
-                   Rcpp::sourceCpp(file = "Calculation_minimizeN_twolambda_update.cpp", cacheDir = "cache")
-                   source('PSO_power.gbop2.R')
+                   # Rcpp::sourceCpp(file = "Calculation_minimizeN_twolambda_update.cpp", cacheDir = "cache")
+                   # source('PSO_power.gbop2.R')
 
                    # Extract the seed for the current iteration
                    current_seed <- seeds_list[i]

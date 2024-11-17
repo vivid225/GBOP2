@@ -17,9 +17,9 @@
 #' @param maxIter maxIter for pso
 #' @param nCore number of core
 #'
-#' @return
+#' @return A list on design parameters and operating characteristics
 #' @export
-#'
+#' @import foreach doParallel globpso R6 Rcpp RcppArmadillo dplyr
 #' @examples
 #' PSOGPower_dual(design = "optimal", #"minimax"
 #' nlooks = 1,
@@ -56,14 +56,14 @@ PSOGPower_dual <- function(design = "optimal",
 
 
 
-  # Load necessary libraries
-  library(foreach)
-  library(doParallel)
-  library(globpso)
-  library(R6)
-  library(Rcpp)
-  library(RcppArmadillo)
-  library(dplyr)
+
+  # library(foreach)
+  # library(doParallel)
+  # library(globpso)
+  # library(R6)
+  # library(Rcpp)
+  # library(RcppArmadillo)
+  # library(dplyr)
 
   # Set up parallel computing
   cl <- makePSOCKcluster(nCore)

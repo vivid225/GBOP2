@@ -80,6 +80,12 @@ PSOGO_power_TE(
 
 \item{nCore}{number of core}
 }
+<<<<<<< HEAD
+=======
+\value{
+A list on design parameters and operating characteristics
+}
+>>>>>>> e2eb909070304bacfc956234fcbae6ed054f6c3c
 \description{
 PSOGO for maximizing power design with efficacy and toxicity boundaries
 }

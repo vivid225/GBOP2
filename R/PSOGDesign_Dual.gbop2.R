@@ -17,9 +17,9 @@
 #' @param maxIter maxIter for pso
 #' @param nCore number of core
 #'
-#' @return
+#' @return A list on design parameters and operating characteristics
 #' @export
-#'
+#' @import foreach doParallel globpso R6 Rcpp RcppArmadillo dplyr
 #' @examples
 #' PSOGDesign_Dual(design = "optimal", #"minimax"
 #' nlooks = 1,
@@ -56,13 +56,13 @@ PSOGDesign_Dual <- function(
     nCore = 4){
 
   # Load necessary libraries
-  library(foreach)
-  library(doParallel)
-  library(globpso)
-  library(R6)
-  library(Rcpp)
-  library(RcppArmadillo)
-  library(dplyr)
+  # library(foreach)
+  # library(doParallel)
+  # library(globpso)
+  # library(R6)
+  # library(Rcpp)
+  # library(RcppArmadillo)
+  # library(dplyr)
 
   # Set up parallel computing
   cl <- makePSOCKcluster(nCore)
@@ -77,10 +77,10 @@ PSOGDesign_Dual <- function(
                  .packages = c("dplyr", "globpso", "R6", "Rcpp", "RcppArmadillo"),
                  .combine = rbind) %dopar%  {
 
-                   # Load necessary Rcpp and R scripts
-                   source("boundcode_equalrand_jsm.R")
-                   Rcpp::sourceCpp(file = "Calculation_twoboundaries_jsm.cpp", cacheDir = "cache")
-                   source('PSODesign_dual.gbop2.R')
+                   # # Load necessary Rcpp and R scripts
+                   # source("boundcode_equalrand_jsm.R")
+                   # Rcpp::sourceCpp(file = "Calculation_twoboundaries_jsm.cpp", cacheDir = "cache")
+                   # source('PSODesign_dual.gbop2.R')
 
                    # Extract the seed for the current iteration
                    current_seed <- seeds_list[i]

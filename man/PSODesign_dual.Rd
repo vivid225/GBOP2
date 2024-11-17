@@ -50,6 +50,12 @@ PSODesign_dual(
 
 \item{maxIter}{maxIter for pso}
 }
+<<<<<<< HEAD
+=======
+\value{
+A list on design parameters and operating characteristics
+}
+>>>>>>> e2eb909070304bacfc956234fcbae6ed054f6c3c
 \description{
 PSO for optimal/minimax design with dual boundaries
 }

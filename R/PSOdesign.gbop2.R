@@ -16,6 +16,8 @@
 #' @param maxIter maxIter for pso
 #'
 #' @return A list
+#' @import  globpso R6 Rcpp RcppArmadillo dplyr
+#'
 #' @export
 #'
 #' @examples
@@ -61,12 +63,12 @@ PSOdesign <- function(
   }
 
   numOfSimForTiralSetting = 10000   # Number of simulations
-  library(globpso)
-  library(R6)
-  library(Rcpp)
-  library(RcppArmadillo)
-  source("boundcode_twolambda.R") # for two lambdas
-  Rcpp::sourceCpp(file="Calculation_minimizeN_twolambda_update.cpp",cacheDir="cache")
+  # library(globpso)
+  # library(R6)
+  # library(Rcpp)
+  # library(RcppArmadillo)
+  # source("boundcode_twolambda.R") # for two lambdas
+  # Rcpp::sourceCpp(file="Calculation_minimizeN_twolambda_update.cpp",cacheDir="cache")
 
   # Rcpp::sourceCpp(file="original_Calculation_minimizeN_twolambda.cpp",cacheDir="cache")
   #

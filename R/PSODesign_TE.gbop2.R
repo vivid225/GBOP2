@@ -23,9 +23,9 @@
 #' @param nSwarm nSwarm in PSO
 #' @param maxIter maxIter in PSO
 #'
-#' @return
+#' @return A list on design parameters and operating characteristics
 #' @export
-#'
+#' @import globpso R6 Rcpp RcppArmadillo dplyr
 #' @examples
 #' PSODesign_TE(design = "optimal",
 #' method = "quantum",
@@ -83,14 +83,14 @@ PSODesign_TE <- function(design = "optimal",
 
   }
 
-  library(globpso)
-  library(R6)
-  library(Rcpp)
-  library(RcppArmadillo)
-  source("BOP2_functions_EffTox.R")
-  source("BOP2_TE_function.R")
-  source("boundcode.R")
-  Rcpp::sourceCpp(file="Calculation2_original.cpp")
+  # library(globpso)
+  # library(R6)
+  # library(Rcpp)
+  # library(RcppArmadillo)
+  # source("BOP2_functions_EffTox.R")
+  # source("BOP2_TE_function.R")
+  # source("boundcode.R")
+  # Rcpp::sourceCpp(file="Calculation2_original.cpp")
   # Rcpp::sourceCpp(file="Calculation_minimizeN.cpp",cacheDir="cache")
   numOfSimForTiralSetting = 10000   # Number of simulations
 

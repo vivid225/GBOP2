@@ -74,6 +74,12 @@ PSODesign_TE(
 
 \item{maxIter}{maxIter in PSO}
 }
+<<<<<<< HEAD
+=======
+\value{
+A list on design parameters and operating characteristics
+}
+>>>>>>> e2eb909070304bacfc956234fcbae6ed054f6c3c
 \description{
 PSO for optimal/minimax design with efficacy and toxicity boundaries
 }

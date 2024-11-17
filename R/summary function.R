@@ -1,4 +1,12 @@
 ## summary function
+#' summary function for PSOdesign, PSO_power,PSOGO_Design, PSOGO_power, PSODesign_dual,PSOPower_dual, PSOGDesign_Dual, PSOGPower_dual, PSODesign_TE, PSOGO_design_TE
+#'
+#' @param object PSOdesign, PSO_power,PSOGO_Design, PSOGO_power, PSODesign_dual,PSOPower_dual, PSOGDesign_Dual, PSOGPower_dual, PSODesign_TE, PSOGO_design_TE
+#' @param ... ignored arguments
+#'
+#' @return A summary table
+#' @export
+
 summary.gbop2 <- function(object, ...) {
 
   ########## PSOdesign ########################################
