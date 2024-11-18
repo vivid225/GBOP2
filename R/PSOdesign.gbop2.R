@@ -17,25 +17,10 @@
 #'
 #' @return A list
 #' @import  globpso R6 Rcpp RcppArmadillo dplyr
+#' @importFrom stats dbinom na.omit pbeta pgamma rmultinom runif
 #'
 #' @export
 #'
-#' @examples
-#'  PSOdesign(
-#'  design = "optimal", #"minimax"
-#'   nlooks = 1,
-#'  b1n = 0.2,  # Null hypothesis response rate
-#'   b1a = 0.4,  # Alternative hypothesis response rate
-#'   err1 = 0.05,  # Type I error rate
-#'   minPower = 0.8, ## power
-#'   weight = 1, ## weight of sample size under null
-#'   maxPatients = 50,  ## maximum number of patients
-#'   Nmin_cohort1 = 10,
-#'   Nmin_increase = 5,
-#'   method = "default", # "quantum", "dexp"
-#'   seed = 1024,   ## set seed to calculate OC
-#'   nSwarm = 64,
-#'   maxIter = 200)
 
 PSOdesign <- function(
     design = "optimal", #"minimax"

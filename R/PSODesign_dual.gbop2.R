@@ -18,22 +18,8 @@
 #' @return A list on design parameters and operating characteristics
 #' @export
 #' @import globpso R6 Rcpp RcppArmadillo dplyr
-#' @examples
-#' PSODesign_dual(
-#' design = "optimal", #"minimax"
-#' method = "default", # "quantum", "dexp" ## make ensemble as default
-#' maxPatients = 50,
-#' nlooks = 1,
-#' Nmin_cohort1 = 10,
-#' Nmin_increase = 5,
-#' weight = 1, ## 1 is H0
-#' b1n = 0.2 ,# Null hypothesis response rate
-#' b1a = 0.4 , # Alternative hypothesis response rate
-#' err1 = 0.05, # Type I error rate
-#' minPower = 0.8,
-#' seed = 1024,
-#' nSwarm = 64,
-#' maxIter = 200)
+#' @importFrom stats dbinom na.omit pbeta pgamma rmultinom runif
+
 
 PSODesign_dual <- function(
     design = "optimal", #"minimax"
@@ -224,7 +210,7 @@ PSODesign_dual <- function(
   for ( i in n_sim){
     res <- globpso(objFunc = objf, lower = low_bound, upper = upp_bound,
                    fixed = NULL, PSO_INFO = alg_setting,
-                   inputlist = inputlist, fcn = maxresp, seed=seeds[i])
+                   inputlist = inputlist, fcn = maxresp_dual, seed=seeds[i])
 
     pars = res$par
 
@@ -264,7 +250,7 @@ PSODesign_dual <- function(
     nobs2 <- cohortSize(N = n, R = nlooks, w = w_list)
 
 
-    bd = t(getboundary(dprior=c(p.n, 1-p.n),contrast=as.matrix(1),
+    bd = t(getboundary_dual(dprior=c(p.n, 1-p.n),contrast=as.matrix(1),
                        nobs=nobs2,b=b,b_grad1=b_grad1,b_grad2=b_grad2,
                        pow1=pow1, pow2 = pow2, pow3=pow3,
                        phi=input$b1n,delta0=delta0,delta1=delta1));
@@ -273,7 +259,7 @@ PSODesign_dual <- function(
                                b=b, b_grad1=b_grad1,b_grad2=b_grad2,
                                pow1=pow1, pow2 = pow2, pow3=pow3,
                                dprior= c(p.n,1-p.n), ptrue=p.a, phi=p.n,
-                               delta0=delta0,delta1=delta1, fff=maxresp)
+                               delta0=delta0,delta1=delta1, fff=maxresp_dual)
 
 
   }

@@ -56,30 +56,9 @@ PSOGDesign_Dual(
 
 \item{nCore}{number of core}
 }
-<<<<<<< HEAD
-=======
 \value{
 A list on design parameters and operating characteristics
 }
->>>>>>> e2eb909070304bacfc956234fcbae6ed054f6c3c
 \description{
 PSOGO for optimal/minimax design with dual bounderies
-}
-\examples{
-PSOGDesign_Dual(design = "optimal", #"minimax"
-nlooks = 1,
-b1n = 0.2,  # Null hypothesis response rate
-b1a = 0.4,  # Alternative hypothesis response rate
-err1 = 0.05,  # Type I error rate
-nParallel = 3,
-minPower = 0.8, ## power
-weight = 1, ## weight of sample size under null
-maxPatients = 50,  ## maximum number of patients
-Nmin_cohort1 = 10,
-Nmin_increase = 5,
-pso_method = "all", ## three different pso or three single pso
-seed = 123,
-nSwarm = 64,
-maxIter = 200,
-nCore = 4)
 }

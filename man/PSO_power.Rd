@@ -50,20 +50,3 @@ A list
 \description{
 PSO maximizing power design with single boundary
 }
-\examples{
-
- PSO_power(
- nlooks = 1,
- totalPatients = 50, ## total patients in optimal_power
- Nmin_cohort1 = 10,
- Nmin_increase = 5,
- method = "default", # "quantum", "dexp"
- b1n = 0.2,  # Null hypothesis response rate
- b1a = 0.4,  # Alternative hypothesis response rate
- err1 = 0.05,  # Type I error rate
- minPower = 0.8, ## power
- seed = 1024,   ## set seed to calculate OC
- nSwarm = 64,
- maxIter = 200
- )
-}

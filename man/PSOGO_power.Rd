@@ -56,20 +56,3 @@ a list
 \description{
 PSOGO for maximizing power design with single boundary
 }
-\examples{
-PSOGO_power(
- nlooks = 1,
- b1n = 0.2,  # Null hypothesis response rate
- b1a = 0.4,  # Alternative hypothesis response rate
- err1 = 0.05,  # Type I error rate
- nParallel = 3,
- minPower = 0.8, ## power
- weight = 1, ## weight of sample size under null
- totalPatients = 50,  ## maximum number of patients
- Nmin_cohort1 = 10,
- Nmin_increase = 5,
- pso_method = "all", ## three different pso or three single pso
- nSwarm = 64,
- maxIter = 200,
- nCore = 4)
-}

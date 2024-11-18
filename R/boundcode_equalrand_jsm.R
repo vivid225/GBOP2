@@ -7,7 +7,7 @@
 # sourceCpp("Calculation.cpp")
 # sourceCpp(file="Calculation.cpp",cacheDir="cache")
 
-maxresp <- function(cutoff1,cutoff2,cutoff2_lambda1,cutoff2_lambda2,dprior,ntr,phi,delta0,delta1,contrast)
+maxresp_dual <- function(cutoff1,cutoff2,cutoff2_lambda1,cutoff2_lambda2,dprior,ntr,phi,delta0,delta1,contrast)
 { ##dprior: Dirichlet prior
   ##contrast: design vector: b with elements of 0 and 1
   ##ntr=n=nobs.seq[i]=nobs[i]:  sample sizes
@@ -15,7 +15,7 @@ maxresp <- function(cutoff1,cutoff2,cutoff2_lambda1,cutoff2_lambda2,dprior,ntr,p
   ncut_fut=NULL
   ncut_grad=NULL
   contrast = matrix(contrast,nrow=length(phi))
-  
+
   ncut_fut = max(which(1-pbeta(phi+delta0,0:ntr+sum(dprior[which(contrast[1,]==1)]),ntr:0+sum(dprior)-sum(dprior[which(contrast[1,]==1)]))<(1-cutoff1)))-1
   if (1-cutoff2 != 0) {
     tmp = which(1-pbeta(phi+delta1 * (2-cutoff2),0:ntr+sum(dprior[which(contrast[1,]==1)]),ntr:0+sum(dprior)-sum(dprior[which(contrast[1,]==1)]))>1-cutoff2_lambda1)
@@ -32,14 +32,14 @@ maxresp <- function(cutoff1,cutoff2,cutoff2_lambda1,cutoff2_lambda2,dprior,ntr,p
       ncut_grad = min(tmp)-1
     }
   }
-  
+
   results = c(ncut_fut, ncut_grad)
   return(results)
 }
 
 ##Binary Efficacy, Ordinal Efficacy, Multiple Efficacy
 # getboundary <- function(dprior,contrast,nobs,b,b2,b_grad1,b_grad2,pow,phi,delta0,delta1)
-getboundary <- function(dprior,contrast,nobs,b,b_grad1,b_grad2,pow1,pow2,pow3,phi,delta0,delta1)
+getboundary_dual <- function(dprior,contrast,nobs,b,b_grad1,b_grad2,pow1,pow2,pow3,phi,delta0,delta1)
 {
   stopbound_fut = NULL
   stopbound_grad = NULL
@@ -54,12 +54,12 @@ getboundary <- function(dprior,contrast,nobs,b,b_grad1,b_grad2,pow1,pow2,pow3,ph
     #                      dprior=dprior,contrast=contrast,ntr=n,phi=phi,delta0=delta0,delta1=delta1)
     # }
     # fff(b*pow(n/nmax,pow1),pow(n/nmax,pow2),b_grad1,b_grad2,dprior,n,phi,delta0,delta1,contrast);
-    cutoffs = maxresp(cutoff1=b*(n/nmax)^pow1,cutoff2=(n/nmax)^(pow2),
+    cutoffs = maxresp_dual(cutoff1=b*(n/nmax)^pow1,cutoff2=(n/nmax)^(pow2),
                       cutoff2_lambda1=b_grad1*(n/nmax)^(pow3),cutoff2_lambda2=b_grad2,
                      dprior=dprior,contrast=contrast,ntr=n,phi=phi,delta0=delta0,delta1=delta1)
-    
+
     # print(cutoffs)
-    
+
     stopbound_fut = cbind(stopbound_fut,cutoffs[1])
     if(!(n %in% nobs)) stopbound_fut[ncol(stopbound_fut)] = -Inf
     stopbound_grad = cbind(stopbound_grad,cutoffs[2])
@@ -68,7 +68,7 @@ getboundary <- function(dprior,contrast,nobs,b,b_grad1,b_grad2,pow1,pow2,pow3,ph
   boundary <- rbind(nobs,stopbound_fut,stopbound_grad)
   boundary[which(boundary>999)]=999
   boundary[which(boundary< -999)]=-999
-  
+
   return(boundary)
 }
 

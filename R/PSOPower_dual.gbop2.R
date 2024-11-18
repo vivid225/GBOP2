@@ -17,21 +17,9 @@
 #' @export
 #'
 #' @import globpso R6 Rcpp RcppArmadillo dplyr
+#' @importFrom stats dbinom na.omit pbeta pgamma rmultinom runif
 #'
-#' @examples
-#' PSOPower_dual(
-#' method = "default", # "quantum", "dexp"
-#' totalPatients = 50,
-#' nlooks = 1,
-#' Nmin_cohort1 = 10,
-#' Nmin_increase = 10,
-#' b1n = 0.2 ,# Null hypothesis response rate
-#' b1a = 0.4 , # Alternative hypothesis response rate
-#' err1 = 0.05, # Type I error rate
-#' minPower = 0.8,
-#' seed = 1024,
-#' nSwarm = 64,
-#' maxIter = 200)
+
 
 PSOPower_dual <- function(
     method = "default", # "quantum", "dexp"
@@ -215,7 +203,7 @@ PSOPower_dual <- function(
   for ( i in 1){
     res <- globpso(objFunc = objf, lower = low_bound, upper = upp_bound,
                    fixed = NULL, PSO_INFO = alg_setting,
-                   inputlist = inputlist, fcn = maxresp, seed=seeds[i])
+                   inputlist = inputlist, fcn = maxresp_dual, seed=seeds[i])
     # print(res$par)
     # print(res$val)
 
@@ -257,7 +245,7 @@ PSOPower_dual <- function(
     nobs2 <- cohortSize(N = totalPatients, R = nlooks, w = w_list)
 
 
-    bd = t(getboundary(dprior=c(p.n, 1-p.n),contrast=as.matrix(1),
+    bd = t(getboundary_dual(dprior=c(p.n, 1-p.n),contrast=as.matrix(1),
                        nobs=nobs2,b=b,b_grad1=b_grad1,b_grad2=b_grad2,
                        pow1=pow1, pow2 = pow2, pow3=pow3,
                        phi=input$b1n,delta0=delta0,delta1=delta1)); bd
@@ -266,7 +254,7 @@ PSOPower_dual <- function(
                                b=b, b_grad1=b_grad1,b_grad2=b_grad2,
                                pow1=pow1, pow2 = pow2, pow3=pow3,
                                dprior= c(p.n,1-p.n), ptrue=p.a, phi=p.n,
-                               delta0=delta0,delta1=delta1, fff=maxresp)
+                               delta0=delta0,delta1=delta1, fff=maxresp_dual)
     expected_sample = power_result[[4]]
 
   }

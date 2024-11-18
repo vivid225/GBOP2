@@ -20,23 +20,10 @@
 #' @return A list on design parameters and operating characteristics
 #' @export
 #' @import foreach doParallel globpso R6 Rcpp RcppArmadillo dplyr
-#' @examples
-#' PSOGPower_dual(design = "optimal", #"minimax"
-#' nlooks = 1,
-#' b1n = 0.2,  # Null hypothesis response rate
-#' b1a = 0.4,  # Alternative hypothesis response rate
-#' err1 = 0.05,  # Type I error rate
-#' nParallel = 3,
-#' minPower = 0.8, ## power
-#' weight = 1, ## weight of sample size under null
-#' totalPatients = 50,  ## maximum number of patients
-#' Nmin_cohort1 = 10,
-#' Nmin_increase = 5,
-#' pso_method = "all", ## three different pso or three single pso
-#' seed = 1024,
-#' nSwarm = 64,
-#' maxIter = 200,
-#' nCore = 4)
+#' @importFrom stats dbinom na.omit pbeta pgamma rmultinom runif
+#' @importFrom parallel makePSOCKcluster stopCluster
+
+
 PSOGPower_dual <- function(design = "optimal",
                            nlooks = 1,
                            b1n = 0.2,
@@ -79,10 +66,10 @@ PSOGPower_dual <- function(design = "optimal",
                  .combine = rbind) %dopar%  {
 
                    # Load Rcpp source and custom functions for each worker
-                   source("boundcode_equalrand_jsm.R")
-                   Rcpp::sourceCpp(file = "Calculation_twoboundaries_jsm.cpp", cacheDir = "cache")
+                   # source("boundcode_equalrand_jsm.R")
+                   # Rcpp::sourceCpp(file = "Calculation_twoboundaries_jsm.cpp", cacheDir = "cache")
                    numOfSimForTiralSetting <- 10000   # Number of simulations
-                   source('PSOPower_dual.gbop2.R')
+                   # source('PSOPower_dual.gbop2.R')
 
                    # Extract the seed for the current iteration
                    current_seed <- seeds_list[i]

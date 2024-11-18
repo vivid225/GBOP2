@@ -74,36 +74,9 @@ PSODesign_TE(
 
 \item{maxIter}{maxIter in PSO}
 }
-<<<<<<< HEAD
-=======
 \value{
 A list on design parameters and operating characteristics
 }
->>>>>>> e2eb909070304bacfc956234fcbae6ed054f6c3c
 \description{
 PSO for optimal/minimax design with efficacy and toxicity boundaries
-}
-\examples{
-PSODesign_TE(design = "optimal",
-method = "quantum",
-nlooks = 2,
-skip_efficacy = NULL, # NULL no skipping c(), 1 is skip
-skip_toxicity = NULL , ## NULL c()
-maxPatients = 50, ## maximum number of patients
-Nmin_cohort1 = 10,
-Nmin_increase = 5,
-e1n = 0.3,  # H0 for Eff
-e2n = 0.4,  # H0 for Tox
-e3n = 0.2, # H0 for Eff and Tox
-e1a = 0.6,  # Ha for Eff
-e2a = 0.2,  # Ha for Tox
-e3a = 0.15, # Ha for Eff and Tox
-err_eff = 0.1,  # Type I error rate: Efficacious but toxic
-err_tox = 0.1,  # Type I error rate: Safe but futile
-err_all = 0.05,  # Type I error rate: Futile and toxic
-power_eff = 0.8,
-power_tox = 0.8,
-power_all = 0.8,
-nSwarm = 32,
-maxIter = 100)
 }

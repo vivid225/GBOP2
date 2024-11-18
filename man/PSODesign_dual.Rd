@@ -50,29 +50,9 @@ PSODesign_dual(
 
 \item{maxIter}{maxIter for pso}
 }
-<<<<<<< HEAD
-=======
 \value{
 A list on design parameters and operating characteristics
 }
->>>>>>> e2eb909070304bacfc956234fcbae6ed054f6c3c
 \description{
 PSO for optimal/minimax design with dual boundaries
-}
-\examples{
-PSODesign_dual(
-design = "optimal", #"minimax"
-method = "default", # "quantum", "dexp" ## make ensemble as default
-maxPatients = 50,
-nlooks = 1,
-Nmin_cohort1 = 10,
-Nmin_increase = 5,
-weight = 1, ## 1 is H0
-b1n = 0.2 ,# Null hypothesis response rate
-b1a = 0.4 , # Alternative hypothesis response rate
-err1 = 0.05, # Type I error rate
-minPower = 0.8,
-seed = 1024,
-nSwarm = 64,
-maxIter = 200)
 }
